@@ -28,6 +28,20 @@ The Active Connections Auditor Agent is a Python-based Linux security utility th
 ```bash
 cd active_connections_auditor
 python3 active_connections_auditor.py
+
+#for TCP connections
+python3 -c 'import socket,time; s=socket.create_connection(("1.1.1.1",443),timeout=5); print("TCP connection established"); time.sleep(60); s.close()'
+
+#for UDP connections
+python3 -c 'import socket,time; s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM); s.connect(("8.8.8.8",53)); print("UDP socket opened"); time.sleep(30); s.close()'
+
+#to check if connection is established
+ss -H -uan
+
+#port-review rule
+python3 -c 'from active_connections_auditor import analyze_connections; print(analyze_connections([{"remote_ip":"8.8.8.8","remote_port":4444}], {}))'
+
+
 ```
 
 ## Programmatic Usage
