@@ -32,10 +32,13 @@ python3 active_connections_auditor.py
 #for TCP connections
 python3 -c 'import socket,time; s=socket.create_connection(("1.1.1.1",443),timeout=5); print("TCP connection established"); time.sleep(60); s.close()'
 
+#to check if TCP connections is established
+ss -H -tn state established
+
 #for UDP connections
 python3 -c 'import socket,time; s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM); s.connect(("8.8.8.8",53)); print("UDP socket opened"); time.sleep(30); s.close()'
 
-#to check if connection is established
+#to check if UDP connection is established
 ss -H -uan
 
 #port-review rule
